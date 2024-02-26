@@ -30,7 +30,7 @@ export class UserAddress extends Model<UserAddress, UserAddressCreationAttrs> {
   })
   idUserAddress: number;
 
-  @ForeignKey(() => UserAddress) //ссылается на юзерс контроллер это нормально максим?
+  @ForeignKey(() => UserAddress)
   @Column({ type: DataType.INTEGER })
   idUser: number;
 
