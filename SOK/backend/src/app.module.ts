@@ -11,19 +11,22 @@ import { OfferListModule } from "./offer-list/offer-list.module";
 import { WishListModule } from "./wish-list/wish-list.module";
 import { BookLiteraryModule } from "./book-literary/book-literary.module";
 import { AutorModule } from "./autor/autor.module";
-import { BookResponseModule } from './book-response/book-response.module';
-import { UserMsgModule } from './user-msg/user-msg.module';
-import { ExchangeListModule } from './exchange-list/exchange-list.module';
-import { UserExchangeListModule } from './user-exchange-list/user-exchange-list.module';
-import { UserListController } from './user-list/user-list.controller';
-import { UserListService } from './user-list/user-list.service';
-import { UserListModule } from './user-list/user-list.module';
-import { UserValueCategoryModule } from './user-value-category/user-value-category.module';
-import { CategoryController } from './category/category.controller';
-import { CategoryService } from './category/category.service';
-import { CategoryModule } from './category/category.module';
-import { StatusModule } from './status/status.module';
+import { BookResponseModule } from "./book-response/book-response.module";
+import { UserMsgModule } from "./user-msg/user-msg.module";
+import { ExchangeListModule } from "./exchange-list/exchange-list.module";
+import { UserExchangeListModule } from "./user-exchange-list/user-exchange-list.module";
+import { UserListController } from "./user-list/user-list.controller";
+import { UserListService } from "./user-list/user-list.service";
+import { UserListModule } from "./user-list/user-list.module";
+import { UserValueCategoryModule } from "./user-value-category/user-value-category.module";
+import { CategoryController } from "./category/category.controller";
+import { CategoryService } from "./category/category.service";
+import { CategoryModule } from "./category/category.module";
+import { StatusModule } from "./status/status.module";
 import * as path from "path";
+import { UserAddress } from "./user-address/user-address.model";
+import { UserMsg } from "./user-msg/user-msg.model";
+import { Status } from "./status/status.model";
 
 @Module({
   controllers: [UserListController, CategoryController],
@@ -42,7 +45,7 @@ import * as path from "path";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [User, UserAddress, UserMsg, Status], //закинуть все модели которые будут использоваться
       autoLoadModels: true,
     }),
     UsersModule,

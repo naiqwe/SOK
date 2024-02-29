@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
@@ -7,12 +8,14 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { Status } from "src/status/status.model";
+import { User } from "src/users/users.model";
 
 interface UserMsgCreationAttrs {
   idUser: number;
   text: string;
   notes: string;
-  idStatus: string;
+  idStatus: number;
   type: number;
 }
 
@@ -26,7 +29,7 @@ export class UserMsg extends Model<UserMsg, UserMsgCreationAttrs> {
   })
   idUserMsg: number;
 
-  @ForeignKey(() => UserMsg)
+  @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUser: number;
 
@@ -36,10 +39,16 @@ export class UserMsg extends Model<UserMsg, UserMsgCreationAttrs> {
   @Column({ type: DataType.STRING })
   notes: string;
 
-  @ForeignKey(() => UserMsg)
-  @Column({ type: DataType.STRING, allowNull: false })
-  idStatus: string;
+  @ForeignKey(() => Status)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  idStatus: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
   type: number;
+
+  @BelongsTo(() => User) //принадлежит
+  ownerUserMsg: User; //владелец, связь User и UserMsg
+
+  @BelongsTo(() => Status) //принадлежит
+  status: Status; //владелец, связь Status и UserMsg
 }

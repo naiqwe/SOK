@@ -1,19 +1,18 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { UserAddressService } from "./user-address.service";
+import { CreateUserAddressDto } from "./dto/create-useraddress.dto";
 
-@Controller("user-address")
-export class UserAddressController {
-  //Нужна помощь максима
-  constructor(private usersAddressService: UserAddressService) {}
+@Controller("users-addres")
+export class UsersAddressController {
+  constructor(private usersAddresService: UserAddressService) {}
 
-  //   @Post()
-  //   create(@Body() userDto: UserAddressService) {
+  @Post()
+  create(@Body() adressDto: CreateUserAddressDto) {
+    return this.usersAddresService.createAddress(adressDto);
+  }
 
-  //     return this.usersAddressService.createUser(userDto);
-  //   }
-
-  //   @Get()
-  //   getAll() {
-  //     return this.usersAddressService.getAllUsers();
-  //   }
+  @Get()
+  getAll() {
+    return this.usersAddresService.getAllAddress();
+  }
 }
