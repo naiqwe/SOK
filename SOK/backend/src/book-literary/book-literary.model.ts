@@ -9,7 +9,7 @@ import {
 } from "sequelize-typescript";
 
 interface BookLiteraryCreationAttrs {
-  idAuthor: number;
+  idAutor: number;
   bookName: string;
   note: string;
 }
@@ -27,9 +27,9 @@ export class BookLiterary extends Model<
   })
   idBookLiterary: number;
 
-  @ForeignKey(() => BookLiterary)
+  // @ForeignKey(() => BookLiterary)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  idAuthor: number;
+  idAutor: number;
 
   @Column({ type: DataType.STRING, allowNull: false })
   bookName: string;

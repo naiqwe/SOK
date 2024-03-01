@@ -27,10 +27,20 @@ import * as path from "path";
 import { UserAddress } from "./user-address/user-address.model";
 import { UserMsg } from "./user-msg/user-msg.model";
 import { Status } from "./status/status.model";
+import { WishList } from "./wish-list/wish-list.model";
+import { Offer } from "./offer-list/offer-list.model";
+import { BookResponse } from "./book-response/book-response.model";
+import { BookLiterary } from "./book-literary/book-literary.model";
+import { Autor } from "./autor/autor.model";
+import { ExchangeList } from "./exchange-list/exchange-list.model";
+import { UserExchangeList } from "./user-exchange-list/user-exchange-list.model";
+import { UserList } from "./user-list/user-list.model";
+import { UserValueCategory } from "./user-value-category/user-value-category.model";
+import { Category } from "./category/category.model";
 
 @Module({
-  controllers: [UserListController, CategoryController],
-  providers: [UserListService, CategoryService],
+  controllers: [], //UserListController,CategoryService
+  providers: [], //UserListService,CategoryService
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -45,7 +55,22 @@ import { Status } from "./status/status.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, UserAddress, UserMsg, Status], //закинуть все модели которые будут использоваться
+      models: [
+        User,
+        UserAddress,
+        UserMsg,
+        Status,
+        WishList,
+        Offer,
+        BookResponse,
+        BookLiterary,
+        Autor,
+        ExchangeList,
+        UserExchangeList,
+        UserList,
+        UserValueCategory,
+        Category,
+      ], //закинуть все модели которые будут использоваться
       autoLoadModels: true,
     }),
     UsersModule,

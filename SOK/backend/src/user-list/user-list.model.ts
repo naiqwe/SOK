@@ -23,7 +23,7 @@ export class UserList extends Model<UserList, UserListAttrs> {
   })
   idUserList: number;
 
-  @ForeignKey(() => UserList)
+  // @ForeignKey(() => UserList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idList: number;
 

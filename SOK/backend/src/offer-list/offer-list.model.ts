@@ -12,7 +12,7 @@ interface OfferListCreationAttrs {
   idBookLiterary: number;
   idUser: number;
   ibsn: string;
-  yearPublishing: Date;
+  yearPublishing: string;
   idStatus: number;
 }
 
@@ -26,21 +26,21 @@ export class Offer extends Model<Offer, OfferListCreationAttrs> {
   })
   idOfferList: number;
 
-  @ForeignKey(() => Offer)
+  // @ForeignKey(() => Offer)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idBookLiterary: number;
 
-  @ForeignKey(() => Offer)
+  // @ForeignKey(() => Offer)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUser: number;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING }) //null, fix it
   ibsn: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  yearPublishing: Date; //помощь максима
+  yearPublishing: string;
 
-  @ForeignKey(() => Offer)
+  // @ForeignKey(() => Offer)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idStatus: number;
 }

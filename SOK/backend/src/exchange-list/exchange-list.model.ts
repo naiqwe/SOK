@@ -26,19 +26,19 @@ export class ExchangeList extends Model<ExchangeList, ExchangeListAttrs> {
   })
   idExchangeList: number;
 
-  @ForeignKey(() => ExchangeList)
+  // @ForeignKey(() => ExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idOfferList1: number;
 
-  @ForeignKey(() => ExchangeList)
+  // @ForeignKey(() => ExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idWishList1: number;
 
-  @ForeignKey(() => ExchangeList)
+  // @ForeignKey(() => ExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idOfferList2: number;
 
-  @ForeignKey(() => ExchangeList)
+  // @ForeignKey(() => ExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idWishList2: number;
 
