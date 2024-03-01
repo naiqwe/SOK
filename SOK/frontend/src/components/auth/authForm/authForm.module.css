@@ -1,0 +1,70 @@
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* .inputWrapper:nth-child(2) {
+  margin-bottom: 30px;
+} */
+
+/* label {
+  margin-bottom: 11px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #767676;
+  text-transform: uppercase;
+} */
+
+input {
+  padding: 12px 10px;
+  border: 1px solid #999;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.inputWrapper > div > p {
+  position: absolute;
+  top: 53px;
+  left: 9px;
+  right: 0;
+  bottom: 0;
+}
+
+.formInner {
+  display: flex;
+  flex-direction: column;
+}
+
+.formsContainer {
+  width: 100%;
+  margin-left: 10px;
+}
+
+button {
+  display: block;
+  padding: 12px 15px;
+  margin-top: 20px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #2e78b6;
+  border: none;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #205580;
+  cursor: pointer;
+}
+
+.emailError {
+  position: absolute;
+  color: red;
+  font-size: 14px;
+  top: 80px;
+  left: 25px;
+  right: 0;
+  bottom: 0;
+}
