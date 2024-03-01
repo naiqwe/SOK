@@ -6,6 +6,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { UserAddress } from "src/user-address/user-address.model";
+import { UserMsg } from "src/user-msg/user-msg.model";
 
 interface UserCreationAttrs {
   firstName: string;
@@ -28,7 +30,7 @@ export class User extends Model<User, UserCreationAttrs> {
     autoIncrement: true,
     primaryKey: true,
   })
-  id: number;
+  idUser: number;
 
   @Column({ type: DataType.STRING, allowNull: false })
   firstName: string;
@@ -59,4 +61,10 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isSuperUser: boolean;
+
+  @HasMany(() => UserAddress) //один ко многим, связь User и UserAddres
+  userAddress: UserAddress[];
+
+  @HasMany(() => UserMsg) //один ко многим, связь User и UserMsg
+  userMsg: UserMsg[];
 }

@@ -25,15 +25,15 @@ export class WishList extends Model<WishList, WishListCreationAttrs> {
   })
   idWishList: number;
 
-  @ForeignKey(() => WishList)
+  // @ForeignKey(() => WishList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUser: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  @ForeignKey(() => WishList)
+  // @ForeignKey(() => WishList)
   idStatus: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  @ForeignKey(() => WishList)
+  // @ForeignKey(() => WishList)
   idUserAddress: number;
 }

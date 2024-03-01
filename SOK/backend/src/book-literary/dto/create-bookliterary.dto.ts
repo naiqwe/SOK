@@ -1,5 +1,5 @@
 export class CreateBookLiteraryDto {
-  readonly idAuthor: number;
+  readonly idAutor: number;
   readonly bookName: string;
   readonly note: string;
 }

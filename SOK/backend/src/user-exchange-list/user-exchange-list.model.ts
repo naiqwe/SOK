@@ -28,11 +28,11 @@ export class UserExchangeList extends Model<
   })
   idUserExchangeList: number;
 
-  @ForeignKey(() => UserExchangeList)
+  // @ForeignKey(() => UserExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idExchangeList: number;
 
-  @ForeignKey(() => UserExchangeList)
+  // @ForeignKey(() => UserExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idOfferList: number;
 

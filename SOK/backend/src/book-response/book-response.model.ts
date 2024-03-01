@@ -28,11 +28,11 @@ export class BookResponse extends Model<
   })
   idBookResponse: number;
 
-  @ForeignKey(() => BookResponse)
+  // @ForeignKey(() => BookResponse)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idBookLiterary: number;
 
-  @ForeignKey(() => BookResponse)
+  // @ForeignKey(() => BookResponse)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUser: number;
 

@@ -26,11 +26,11 @@ export class UserValueCategory extends Model<
   })
   idUserValueCategory: number;
 
-  @ForeignKey(() => UserValueCategory)
+  // @ForeignKey(() => UserValueCategory)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUserList: number;
 
-  @ForeignKey(() => UserValueCategory)
+  // @ForeignKey(() => UserValueCategory)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idCategory: number;
 }

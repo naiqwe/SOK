@@ -10,12 +10,16 @@ import { UsersService } from "src/users/users.service";
 import * as bcrypt from "bcryptjs";
 import { User } from "src/users/users.model";
 import { LoginUserDto } from "./dto/login-user.dto";
+import { RegisterUserDto } from "./dto/register-user.dto";
+import { CreateUserAddressDto } from "src/user-address/dto/create-useraddress.dto";
+import { UserAddressService } from "src/user-address/user-address.service";
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private userAddressService: UserAddressService
   ) {}
 
   async login(userDto: LoginUserDto) {
@@ -23,7 +27,7 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  async registration(userDto: CreateUserDto) {
+  async registration(userDto: RegisterUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
     if (candidate) {
       throw new HttpException(
@@ -31,11 +35,37 @@ export class AuthService {
         HttpStatus.BAD_REQUEST
       );
     }
+
+    const userCreate: CreateUserDto = {
+      firstName: userDto.firstName,
+      lastName: userDto.lastName,
+      secondName: userDto?.secondName,
+      email: userDto.email,
+      userName: userDto.userName,
+      password: userDto.password,
+    };
+
     const hashPassword = await bcrypt.hash(userDto.password, 5);
     const user = await this.userService.createUser({
-      ...userDto,
+      ...userCreate,
       password: hashPassword,
     });
+
+    const currenUser = await this.userService.getUserByEmail(user.email);
+
+    const adressCreate: CreateUserAddressDto = {
+      idUser: currenUser.idUser,
+      addrIndex: userDto.addrIndex,
+      addrCity: userDto.addrCity,
+      addrSreet: userDto.addrSreet,
+      addrHouse: userDto.addrHouse,
+      addrStructure: userDto?.addrStructure,
+      addrApart: userDto?.addrApart,
+    };
+
+    const userAddress =
+      await this.userAddressService.createAddress(adressCreate);
+
     return this.generateToken(user);
   }
 

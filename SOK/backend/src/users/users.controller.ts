@@ -26,10 +26,6 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-  //1-06-46
-  //@UseGuards(JwtAuthGuard) убрал для того чтобы это обобщить в другом месте
-
-  //1-06-46
   @Get("/ban")
   ban(@Body() dto: BanUserDto) {
     return this.usersService.ban(dto);

@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
@@ -15,8 +16,8 @@ interface UserAddressCreationAttrs {
   addrCity: string;
   addrSreet: string;
   addrHouse: string;
-  addrStructure: string;
-  addrApart: string;
+  addrStructure?: string; //может прийти а может и не прийти
+  addrApart?: string;
   isDefault: boolean;
 }
 
@@ -30,7 +31,7 @@ export class UserAddress extends Model<UserAddress, UserAddressCreationAttrs> {
   })
   idUserAddress: number;
 
-  @ForeignKey(() => UserAddress) //ссылается на юзерс контроллер это нормально максим?
+  @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   idUser: number;
 
@@ -46,12 +47,15 @@ export class UserAddress extends Model<UserAddress, UserAddressCreationAttrs> {
   @Column({ type: DataType.STRING, allowNull: false })
   addrHouse: string;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, defaultValue: null })
   addrStructure: string;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, defaultValue: null })
   addrApart: string;
 
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isDefault: boolean;
+
+  @BelongsTo(() => User) //принадлежит
+  owner: User; //владелец
 }
