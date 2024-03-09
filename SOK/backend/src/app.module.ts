@@ -39,8 +39,8 @@ import { UserValueCategory } from "./user-value-category/user-value-category.mod
 import { Category } from "./category/category.model";
 
 @Module({
-  controllers: [], //UserListController,CategoryService
-  providers: [], //UserListService,CategoryService
+  controllers: [],
+  providers: [],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -70,7 +70,7 @@ import { Category } from "./category/category.model";
         UserList,
         UserValueCategory,
         Category,
-      ], //закинуть все модели которые будут использоваться
+      ],
       autoLoadModels: true,
     }),
     UsersModule,

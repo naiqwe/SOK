@@ -1,16 +1,20 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from "sequelize-typescript";
+import { UserValueCategory } from "src/user-value-category/user-value-category.model";
 
 interface CategoryAttrs {
   name: string;
-  idParent: number;
+  idParent?: number;
+
   multiSelect: boolean;
 }
 
@@ -24,12 +28,33 @@ export class Category extends Model<Category, CategoryAttrs> {
   })
   idCategory: number;
 
+  // @ForeignKey(() => Category)
+  // @Column({ type: DataType.INTEGER, defaultValue: null })
+  // idParent: number;
+
   @Column({ type: DataType.STRING, allowNull: false })
   name: string;
 
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  idParent: number;
-
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   multiSelect: boolean;
+
+  @HasOne(() => UserValueCategory, {
+    foreignKey: "idUserValueCategory",
+    sourceKey: "idUserValueCategory",
+    as: "IdUserValueCategory",
+  })
+  idUserValueCategory: UserValueCategory;
+
+  @BelongsTo(() => Category, {
+    foreignKey: "idParent",
+    as: "parentCategory",
+    targetKey: "idCategory",
+  })
+  parentCategory: Category;
+
+  @HasOne(() => Category, {
+    foreignKey: "idParent",
+    as: "subCategory",
+  })
+  subCategory: Category;
 }

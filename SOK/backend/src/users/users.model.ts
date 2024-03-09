@@ -6,8 +6,11 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { BookResponse } from "src/book-response/book-response.model";
+import { Offer } from "src/offer-list/offer-list.model";
 import { UserAddress } from "src/user-address/user-address.model";
 import { UserMsg } from "src/user-msg/user-msg.model";
+import { WishList } from "src/wish-list/wish-list.model";
 
 interface UserCreationAttrs {
   firstName: string;
@@ -62,9 +65,18 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isSuperUser: boolean;
 
-  @HasMany(() => UserAddress) //один ко многим, связь User и UserAddres
+  @HasMany(() => UserAddress)
   userAddress: UserAddress[];
 
-  @HasMany(() => UserMsg) //один ко многим, связь User и UserMsg
+  @HasMany(() => UserMsg)
   userMsg: UserMsg[];
+
+  @HasMany(() => WishList)
+  wishList: WishList[];
+
+  @HasMany(() => Offer)
+  offer: Offer[];
+
+  @HasMany(() => BookResponse)
+  bookResponse: BookResponse[];
 }

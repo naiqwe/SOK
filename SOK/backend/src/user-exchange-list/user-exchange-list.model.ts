@@ -1,12 +1,16 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from "sequelize-typescript";
+import { ExchangeList } from "src/exchange-list/exchange-list.model";
+import { Offer } from "src/offer-list/offer-list.model";
 
 interface UserExchangeListAttrs {
   idExchangeList: number;
@@ -28,11 +32,11 @@ export class UserExchangeList extends Model<
   })
   idUserExchangeList: number;
 
-  // @ForeignKey(() => UserExchangeList)
+  @ForeignKey(() => ExchangeList)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idExchangeList: number;
 
-  // @ForeignKey(() => UserExchangeList)
+  @ForeignKey(() => Offer)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idOfferList: number;
 
@@ -41,4 +45,13 @@ export class UserExchangeList extends Model<
 
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   receiving: boolean;
+
+  @BelongsTo(() => ExchangeList)
+  exchangeList: ExchangeList;
+
+  @HasOne(() => Offer, {
+    foreignKey: "idOfferList",
+    sourceKey: "idOfferList",
+  })
+  offerList: Offer;
 }

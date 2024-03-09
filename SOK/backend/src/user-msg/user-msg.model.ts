@@ -46,9 +46,9 @@ export class UserMsg extends Model<UserMsg, UserMsgCreationAttrs> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   type: number;
 
-  @BelongsTo(() => User) //принадлежит
-  ownerUserMsg: User; //владелец, связь User и UserMsg
+  @BelongsTo(() => User)
+  ownerUserMsg: User;
 
-  @BelongsTo(() => Status) //принадлежит
-  status: Status; //владелец, связь Status и UserMsg
+  @BelongsTo(() => Status)
+  status: Status;
 }

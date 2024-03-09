@@ -7,6 +7,7 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { BookLiterary } from "src/book-literary/book-literary.model";
 
 interface AutorCreationAttrs {
   lastName: string;
@@ -28,4 +29,7 @@ export class Autor extends Model<Autor, AutorCreationAttrs> {
 
   @Column({ type: DataType.STRING })
   firstName: string;
+
+  @HasMany(() => BookLiterary)
+  bookLiterary: BookLiterary[];
 }
