@@ -1,12 +1,17 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
   ForeignKey,
   HasMany,
+  HasOne,
   Model,
   Table,
 } from "sequelize-typescript";
+import { Autor } from "src/autor/autor.model";
+import { BookResponse } from "src/book-response/book-response.model";
+import { Offer } from "src/offer-list/offer-list.model";
 
 interface BookLiteraryCreationAttrs {
   idAutor: number;
@@ -27,7 +32,7 @@ export class BookLiterary extends Model<
   })
   idBookLiterary: number;
 
-  // @ForeignKey(() => BookLiterary)
+  @ForeignKey(() => Autor)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idAutor: number;
 
@@ -36,4 +41,15 @@ export class BookLiterary extends Model<
 
   @Column({ type: DataType.STRING, allowNull: false })
   note: string;
+
+  @HasOne(() => Offer, {
+    foreignKey: "idOfferList",
+    sourceKey: "offerBookLiterary",
+    as: "OfferBookLiterary",
+  })
+  @BelongsTo(() => Autor)
+  autorBookLiterary: Autor;
+
+  @HasMany(() => BookResponse)
+  bookResponse: BookResponse[];
 }

@@ -9,6 +9,7 @@ import {
   Table,
 } from "sequelize-typescript";
 import { User } from "src/users/users.model";
+import { WishList } from "src/wish-list/wish-list.model";
 
 interface UserAddressCreationAttrs {
   idUser: number;
@@ -56,6 +57,9 @@ export class UserAddress extends Model<UserAddress, UserAddressCreationAttrs> {
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   isDefault: boolean;
 
-  @BelongsTo(() => User) //принадлежит
-  owner: User; //владелец
+  @BelongsTo(() => User)
+  owner: User;
+
+  @HasMany(() => WishList)
+  wishList: WishList[];
 }

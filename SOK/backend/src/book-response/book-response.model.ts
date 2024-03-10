@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
   BelongsToMany,
   Column,
   DataType,
@@ -7,6 +8,8 @@ import {
   Model,
   Table,
 } from "sequelize-typescript";
+import { BookLiterary } from "src/book-literary/book-literary.model";
+import { User } from "src/users/users.model";
 
 interface BookResponseCreationAttrs {
   idBookLiterary: number;
@@ -28,11 +31,11 @@ export class BookResponse extends Model<
   })
   idBookResponse: number;
 
-  // @ForeignKey(() => BookResponse)
+  @ForeignKey(() => BookLiterary)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idBookLiterary: number;
 
-  // @ForeignKey(() => BookResponse)
+  @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, allowNull: false })
   idUser: number;
 
@@ -41,4 +44,10 @@ export class BookResponse extends Model<
 
   @Column({ type: DataType.STRING })
   note: string;
+
+  @BelongsTo(() => BookLiterary)
+  bookLiterary: BookLiterary;
+
+  @BelongsTo(() => User)
+  user: User;
 }
