@@ -1,6 +1,6 @@
 import style from "./formContainer.module.css";
 import { RegisterForm } from "../authForm/RegisterForm";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../hooks/redux";
 import { PayloadAction } from "@reduxjs/toolkit";
 
@@ -11,17 +11,20 @@ import {
 import { IRegisterUser } from "../../../model/IRegisterUser";
 
 export const FormContainer: React.FC<any> = ({ closeModal }) => {
-  const { pathname } = useLocation();
   const dispath = useAppDispatch();
   const nav = useNavigate();
 
   const handleRegisterEvent = (e: any, userData: IRegisterUser) => {
     e.preventDefault();
 
-    dispath(registerUser(userData)).then((res: PayloadAction<any>) => {
-      console.log(res.payload);
-      nav("/");
-    });
+    dispath(registerUser(userData))
+      .unwrap()
+      .then((res: PayloadAction<any>) => {
+        console.log(res.payload);
+        nav("/");
+        closeModal();
+      })
+      .catch((err) => console.log(err));
   };
 
   //TODO login
@@ -31,6 +34,7 @@ export const FormContainer: React.FC<any> = ({ closeModal }) => {
       email,
       password,
     };
+
     dispath(loginUser(userCreditals)).then((res: PayloadAction<any>) => {
       console.log(res.payload);
       nav("/");

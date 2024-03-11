@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../models/IUser";
 import { loginUser, registerUser } from "./ActionCreators";
 
 interface UserState {
   isAuth: boolean;
-  user: IUser | null;
+  user: any;
   isLoading: boolean;
   error: string;
 }
@@ -58,7 +57,6 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isAuth = false;
         state.user = null;
-        console.log(action.error);
 
         state.error = action.error.message;
       });
