@@ -1,6 +1,5 @@
 import { Dialog } from "@mui/material";
 import React from "react";
-import { RegisterForm } from "../auth/authForm/RegisterForm";
 import { FormContainer } from "../auth/FormContainer/FormContainer";
 
 interface AuthModalProps {
