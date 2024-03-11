@@ -1,0 +1,38 @@
+.formsContainer {
+  width: 100%;
+  margin-left: 10px;
+  padding: 25px 15px;
+  border-radius: 8px;
+}
+
+.inputSection {
+  margin-bottom: 10px;
+}
+
+.inputSectionTitle {
+  margin-bottom: 10px;
+}
+
+.swapInputsWrapper {
+  display: flex;
+}
+
+.isbnInputWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.yearInputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+input {
+  padding: 12px 10px;
+  border: 1px solid #999;
+  font-size: 14px;
+  line-height: 1.7;
+}
