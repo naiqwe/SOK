@@ -5,12 +5,28 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Container,
 } from "@mui/material";
 import { AuthModal } from "../modal/AuthModal";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { HOME_ROUTE, SWAP_ROUTE } from "../../utils/consts";
+import style from "./header.module.css";
+
+interface INavItem {
+  name: string;
+  route: string;
+}
+
 export const Header = () => {
-  const [isModalOpen, setisModalOpen] = useState(true);
-  const navItems = ["Главная", "Начать обмен", "Мои обмены", "Задать вопрос"];
+  const nav = useNavigate();
+  const [isModalOpen, setisModalOpen] = useState(false);
+  const navItems: INavItem[] = [
+    { name: "Главная", route: HOME_ROUTE },
+    { name: "Начать обмен", route: SWAP_ROUTE },
+    { name: "Мои обмены", route: "/myswaps" },
+    { name: "Задать вопрос", route: "/questions" },
+  ];
 
   function closeModal() {
     setisModalOpen(false);
@@ -20,56 +36,75 @@ export const Header = () => {
     setisModalOpen(true);
   }
 
+  function handleNavClick(route: string) {
+    nav(route);
+  }
+
   return (
     <>
-      <Box sx={{ display: "flex", color: "#fff" }}>
-        <Box
-          sx={{
-            textAlign: "left ",
-            flexGrow: "1",
-            backgroundColor: "#1769aa",
-            marginRight: "20px",
-          }}
-        >
-          <Typography variant="h6" sx={{ my: 2, ml: 4 }}>
-            LOGO
-          </Typography>
-        </Box>
-        <Box sx={{ backgroundColor: "#1769aa" }}>
-          <List sx={{ display: "flex" }}>
-            <ListItem disablePadding>
-              <ListItemButton onClick={openModal} sx={{ textAlign: "center" }}>
-                <ListItemText>Авторизация</ListItemText>
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText>Регистрация</ListItemText>
-              </ListItemButton>
-            </ListItem>
-          </List>
-        </Box>
+      {/* <Box sx={{ backgroundColor: "#1769aa" }}> */}
+      {/* <Box sx={{ backgroundColor: "#456990" }}> */}
+      <Box sx={{ backgroundColor: "#4E598C" }}>
+        <Container maxWidth="xl">
+          <Box sx={{ display: "flex", color: "#fff" }}>
+            <Box
+              sx={{
+                textAlign: "left ",
+                flexGrow: "1",
+                marginRight: "20px",
+              }}
+            >
+              <Typography variant="h6" sx={{ my: 2, ml: 4 }}>
+                LOGO
+              </Typography>
+            </Box>
+            <Box>
+              <List sx={{ display: "flex" }}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    onClick={openModal}
+                    sx={{ textAlign: "center" }}
+                  >
+                    <ListItemText>Авторизация</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ textAlign: "center" }}>
+                    <ListItemText>Регистрация</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Box>
+          </Box>
+        </Container>
       </Box>
-      <Box mt="20px">
-        <List
-          sx={{ display: "flex", backgroundColor: "#1769aa", color: "#fff" }}
-        >
-          {navItems.map((item) => (
-            <ListItem key={item} sx={{ pt: 0, pb: 0 }}>
+      <Container
+        disableGutters
+        maxWidth="xl"
+        sx={{ backgroundColor: "#4EA5D9" }}
+      >
+        <List disablePadding sx={{ display: "flex", color: "#fff" }}>
+          {navItems.map((item: INavItem) => (
+            <ListItem disablePadding key={item.route} sx={{ pt: 0, pb: 0 }}>
               <ListItemButton
+                className={style.navButton}
+                onClick={() => handleNavClick(item.route)}
                 sx={{
+                  ":hover": {
+                    bgcolor: "#3d81a9",
+                  },
                   textAlign: "center",
-                  backgroundColor: "#698bad",
+                  backgroundColor: "inherit",
                   pt: 0,
                   pb: 0,
                 }}
               >
-                <ListItemText primary={item} />
+                <ListItemText primary={item.name}></ListItemText>
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-      </Box>
+      </Container>
       <AuthModal isOpen={isModalOpen} onClose={closeModal}></AuthModal>
     </>
   );

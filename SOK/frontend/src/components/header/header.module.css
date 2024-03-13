@@ -1,0 +1,7 @@
+.navButton {
+  height: 48px;
+}
+
+.navButton:hover {
+  background-color: #000000;
+}

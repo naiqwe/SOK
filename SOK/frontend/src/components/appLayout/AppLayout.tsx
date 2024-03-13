@@ -8,9 +8,14 @@ interface Props {
 
 export const AppLayout: React.FC<Props> = ({ children }) => {
   return (
-    <Container maxWidth="xl" sx={{ backgroundColor: "#eee ", height: "100vh" }}>
+    <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <Header></Header>
-      {children}
+      <Container
+        maxWidth="xl"
+        sx={{ backgroundColor: "#eee ", height: "calc(100% - 112px)" }}
+      >
+        {children}
+      </Container>
     </Container>
   );
 };
