@@ -52,9 +52,9 @@ export class Category extends Model<Category, CategoryAttrs> {
   })
   parentCategory: Category;
 
-  @HasOne(() => Category, {
+  @HasMany(() => Category, {
     foreignKey: "idParent",
     as: "subCategory",
   })
-  subCategory: Category;
+  subCategory: Category[];
 }

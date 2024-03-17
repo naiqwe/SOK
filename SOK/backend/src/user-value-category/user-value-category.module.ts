@@ -12,5 +12,6 @@ import { Category } from "src/category/category.model";
   imports: [
     SequelizeModule.forFeature([UserValueCategory, UserList, Category]),
   ],
+  exports: [UserValueCategoryService],
 })
 export class UserValueCategoryModule {}

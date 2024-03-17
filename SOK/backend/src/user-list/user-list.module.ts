@@ -10,5 +10,6 @@ import { WishList } from "src/wish-list/wish-list.model";
   providers: [UserListService],
   controllers: [UserListController],
   imports: [SequelizeModule.forFeature([UserList, Offer, WishList])],
+  exports: [UserListService],
 })
 export class UserListModule {}
