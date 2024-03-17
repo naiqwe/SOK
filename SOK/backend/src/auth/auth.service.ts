@@ -27,6 +27,15 @@ export class AuthService {
     return this.generateToken(user);
   }
 
+  async check(params: any) {
+    return {
+      token: this.jwtService.sign({
+        email: params.email,
+        id: params.id,
+      }),
+    };
+  }
+
   async registration(userDto: RegisterUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
     if (candidate) {
@@ -77,6 +86,7 @@ export class AuthService {
   }
 
   private async validateUser(userDto: LoginUserDto) {
+    console.log({ userDto });
     const user = await this.userService.getUserByEmail(userDto.email);
     const passwordEquals = await bcrypt.compare(
       userDto.password,
