@@ -3,6 +3,8 @@ import { AppLayout } from "../../components/appLayout/AppLayout";
 import { useState } from "react";
 import { CustomTabPanel } from "./tabPanel/CustomTabPanel";
 import { OfferForm } from "./offerForm/OfferForm";
+import { WishForm } from "./wishForm/WishForm";
+import { AddressForm } from "./addressForm/AddressForm";
 
 export const SwapPage = () => {
   const [value, setValue] = useState(0);
@@ -74,10 +76,10 @@ export const SwapPage = () => {
             <OfferForm></OfferForm>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            Item Two
+            <WishForm></WishForm>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            Item Three
+            <AddressForm></AddressForm>
           </CustomTabPanel>
         </Box>
       </Box>

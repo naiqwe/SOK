@@ -43,16 +43,6 @@ export const CategoryForm = () => {
     isFilm: false,
     isLanguage: false,
   });
-  // const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-  // const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-    setIsOpen(!isOpen);
-  };
 
   return (
     <div className={style.formsContainer}>
