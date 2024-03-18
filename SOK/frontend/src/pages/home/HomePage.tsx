@@ -6,17 +6,32 @@ export const HomePage = () => {
   return (
     <AppLayout>
       <Box className={style.descriptionContainer}>
-        <Container maxWidth="md">
-          <Typography fontSize={20} sx={{ mt: "70px", textAlign: "center" }}>
+        <Container maxWidth="md" sx={{ mt: "120px" }}>
+          <Typography
+            component={"span"}
+            variant={"body2"}
+            fontSize={20}
+            sx={{ mt: "70px", textAlign: "center" }}
+          >
             Обмен книгами (буккроссер) становится всё более популярен. Это даёт
             шанс бумажным книгам продлить свою жизнь, помогает владельцам книг
             делиться хорошими историями и получать новые впечатления.
-            <Typography fontSize={20} sx={{ mt: "20px" }}>
+            <Typography
+              component={"span"}
+              variant={"body2"}
+              fontSize={20}
+              sx={{ mt: "20px" }}
+            >
               Все буккроссеры любят свои книги и любят их читать. Они щедрые,
               новаторские, дружелюбные, добросердечные, веселые и образованные
               люди.
             </Typography>
-            <Typography fontSize={20} sx={{ mt: "20px" }}>
+            <Typography
+              component={"span"}
+              variant={"body2"}
+              fontSize={20}
+              sx={{ mt: "20px" }}
+            >
               Наш сайт предлагает совершить не просто обмен, а добавить к этому
               увлекательному процессу элемент сюрприза. Подбор книг для обмена
               будет выполнен по пожеланиям участников, но только при получении
