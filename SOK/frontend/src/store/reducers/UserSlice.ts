@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, registerUser } from "./ActionCreators";
+import {
+  checkUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "./ActionCreators";
 
 interface UserState {
   isAuth: boolean;
@@ -18,7 +23,9 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -32,13 +39,13 @@ export const userSlice = createSlice({
         state.isAuth = true;
         state.user = action.payload;
         state.error = "";
+        console.log(state.user);
       })
       .addCase(registerUser.rejected, (state, action: any) => {
         state.isLoading = false;
         state.isAuth = false;
         state.user = null;
-        console.log(action.error);
-
+        console.log(state.error);
         state.error = action.error.message;
       })
       .addCase(loginUser.pending, (state) => {
@@ -57,8 +64,28 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isAuth = false;
         state.user = null;
-
         state.error = action.error.message;
+      })
+      .addCase(logoutUser.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.isAuth = false;
+        state.user = null;
+        state.error = "";
+      })
+      .addCase(checkUser.pending, (state) => {
+        state.isLoading = true;
+        state.isAuth = false;
+        state.user = null;
+      })
+      .addCase(checkUser.fulfilled, (state, action: any) => {
+        state.isLoading = false;
+        state.isAuth = true;
+        state.user = action.payload;
+      })
+      .addCase(checkUser.rejected, (state, action: any) => {
+        state.isLoading = false;
+        state.isAuth = false;
+        state.user = null;
       });
   },
 });
