@@ -5,12 +5,17 @@ import { FormContainer } from "../auth/FormContainer/FormContainer";
 interface AuthModalProps {
   onClose: Function;
   isOpen: boolean;
+  type: "login" | "register";
 }
 
-export const AuthModal: React.FC<AuthModalProps> = ({ onClose, isOpen }) => {
+export const AuthModal: React.FC<AuthModalProps> = ({
+  onClose,
+  isOpen,
+  type,
+}) => {
   return (
     <Dialog maxWidth="md" onClose={() => onClose()} open={isOpen}>
-      <FormContainer closeModal={() => onClose}></FormContainer>
+      <FormContainer type={type} closeModal={() => onClose}></FormContainer>
     </Dialog>
   );
 };
