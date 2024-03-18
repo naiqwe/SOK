@@ -8,19 +8,79 @@ interface AuthFormProps {
 }
 
 export const RegisterForm: React.FC<AuthFormProps> = ({ handleRegister }) => {
-  const email = useInput("", { minLength: 8, inputType: "email" });
+  const email = useInput(
+    "",
+    { minLength: 8, inputType: "email" },
+    {
+      key: "email",
+    }
+  );
   const password = useInput("", { minLength: 8, inputType: "text" });
-  const firstName = useInput("", { minLength: 8, inputType: "text" });
-  const lastName = useInput("", { minLength: 8, inputType: "text" });
-  const secondName = useInput("", { minLength: 8, inputType: "text" });
-  const userName = useInput("", { minLength: 8, inputType: "text" });
+  const firstName = useInput(
+    "",
+    { minLength: 3, inputType: "text" },
+    {
+      key: "firstName",
+    }
+  );
+  const lastName = useInput(
+    "",
+    { minLength: 3, inputType: "text" },
+    {
+      key: "lastName",
+    }
+  );
+  const secondName = useInput(
+    "",
+    { minLength: 3, inputType: "text" },
+    {
+      key: "secondName",
+    }
+  );
+  const userName = useInput("", { minLength: 4, inputType: "text" });
 
-  const addrIndex = useInput("", { minLength: 8, inputType: "text" });
-  const addrCity = useInput("", { minLength: 8, inputType: "text" });
-  const addrSreet = useInput("", { minLength: 8, inputType: "text" });
-  const addrHouse = useInput("", { minLength: 8, inputType: "text" });
-  const addrStructure = useInput("", { minLength: 8, inputType: "text" });
-  const addrApart = useInput("", { minLength: 8, inputType: "text" });
+  const addrIndex = useInput(
+    "",
+    { minLength: 5, inputType: "text" },
+    {
+      key: "addrIndex",
+    }
+  );
+  const addrCity = useInput(
+    "",
+    { minLength: 3, inputType: "text" },
+    {
+      key: "addrCity",
+    }
+  );
+  const addrSreet = useInput(
+    "",
+    { minLength: 3, inputType: "text" },
+    {
+      key: "addrSreet",
+    }
+  );
+  const addrHouse = useInput(
+    "",
+    { minLength: 1, inputType: "text" },
+    {
+      key: "addrHouse",
+    }
+  );
+  const addrStructure = useInput(
+    "",
+    { minLength: 1, inputType: "text" },
+    {
+      key: "addrStructure",
+    }
+  );
+  const addrApart = useInput(
+    "",
+    { minLength: 1, inputType: "text" },
+    {
+      key: "addrApart",
+    }
+  );
 
   const userData: IRegisterUser = {
     email: email.value,

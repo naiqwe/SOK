@@ -1,7 +1,7 @@
 import style from "./formContainer.module.css";
 import { RegisterForm } from "../authForm/RegisterForm";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../hooks/redux";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 import {
@@ -9,8 +9,25 @@ import {
   loginUser,
 } from "../../../store/reducers/ActionCreators";
 import { IRegisterUser } from "../../../model/IRegisterUser";
+import { useState } from "react";
+import { LoginForm } from "../loginForm/LoginForm";
 
-export const FormContainer: React.FC<any> = ({ closeModal }) => {
+interface FormContainerProps {
+  closeModal: Function;
+  type: "login" | "register";
+}
+
+interface ITokenData {
+  email: string;
+  exp: number;
+  iat: number;
+}
+
+export const FormContainer: React.FC<FormContainerProps> = ({
+  closeModal,
+  type,
+}) => {
+  const [error, setError] = useState("");
   const dispath = useAppDispatch();
   const nav = useNavigate();
 
@@ -19,37 +36,47 @@ export const FormContainer: React.FC<any> = ({ closeModal }) => {
 
     dispath(registerUser(userData))
       .unwrap()
-      .then((res: PayloadAction<any>) => {
-        console.log(res.payload);
+      .then((res: ITokenData) => {
+        console.log(res);
         nav("/");
         closeModal();
+        setError("");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err.message));
   };
 
   //TODO login
   const handleLoginEvent = (e: any, email: string, password: string) => {
     e.preventDefault();
     const userCreditals = {
-      email,
-      password,
+      email: email,
+      password: password,
     };
+    console.log(userCreditals);
 
-    dispath(loginUser(userCreditals)).then((res: PayloadAction<any>) => {
-      console.log(res.payload);
-      nav("/");
-      closeModal();
-    });
+    dispath(loginUser(userCreditals))
+      .unwrap()
+      .then((res: any) => {
+        console.log(res.payload);
+        nav("/");
+        closeModal();
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
     <div className={style.container}>
       <div className={style.formWrapper}>
         <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
-          Регистрация
+          {type == "login" ? "Вход" : "Регистрация"}
         </h1>
-        <RegisterForm handleRegister={handleRegisterEvent}></RegisterForm>
+        {type == "register" ? (
+          <RegisterForm handleRegister={handleRegisterEvent}></RegisterForm>
+        ) : (
+          <LoginForm handleLogin={handleLoginEvent}></LoginForm>
+        )}
       </div>
+      {error && <h2>Ошибка:{error}</h2>}
     </div>
   );
 };
