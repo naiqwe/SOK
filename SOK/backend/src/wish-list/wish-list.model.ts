@@ -39,7 +39,7 @@ export class WishList extends Model<WishList, WishListCreationAttrs> {
   @ForeignKey(() => Status)
   idStatus: number;
 
-  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: false }) //, defaultValue: null
   @ForeignKey(() => UserAddress)
   idUserAddress: number;
 

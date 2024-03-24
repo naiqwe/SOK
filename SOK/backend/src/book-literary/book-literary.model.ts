@@ -16,7 +16,7 @@ import { Offer } from "src/offer-list/offer-list.model";
 interface BookLiteraryCreationAttrs {
   idAutor: number;
   bookName: string;
-  note: string;
+  note?: string;
 }
 
 @Table({ tableName: "book-literary" })
@@ -39,7 +39,7 @@ export class BookLiterary extends Model<
   @Column({ type: DataType.STRING, allowNull: false })
   bookName: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING, defaultValue: null })
   note: string;
 
   @HasOne(() => Offer, {

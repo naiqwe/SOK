@@ -9,6 +9,15 @@ export class UserAddressService {
     @InjectModel(UserAddress) private userAddresRepository: typeof UserAddress
   ) {}
 
+  async getAddressByUserId(userId: number) {
+    const address = await this.userAddresRepository.findOne({
+      where: {
+        idUser: userId,
+      },
+    });
+    return address;
+  }
+
   async createAddress(dto: CreateUserAddressDto) {
     const address = await this.userAddresRepository.create(dto);
     return address;

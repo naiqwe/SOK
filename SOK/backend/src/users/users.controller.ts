@@ -10,6 +10,7 @@ import {
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { BanUserDto } from "./dto/ban-user.dto";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 @Controller("users")
 export class UsersController {
@@ -20,7 +21,7 @@ export class UsersController {
     //
     return this.usersService.createUser(userDto);
   }
-
+  @UseGuards(JwtAuthGuard)
   @Get()
   getAll() {
     return this.usersService.getAllUsers();

@@ -18,6 +18,8 @@ export class CategoryService {
     const category = await this.categoryRepository.findAll({
       include: { all: true },
     });
-    return category;
+
+    return category.filter((item) => item.parentCategory == null);
+    // return category;
   }
 }

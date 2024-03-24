@@ -9,5 +9,6 @@ import { Autor } from "src/autor/autor.model";
   providers: [BookLiteraryService],
   controllers: [BookLiteraryController],
   imports: [SequelizeModule.forFeature([BookLiterary, Autor])],
+  exports: [BookLiteraryService],
 })
 export class BookLiteraryModule {}

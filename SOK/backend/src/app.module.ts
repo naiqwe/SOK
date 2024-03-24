@@ -37,10 +37,13 @@ import { UserExchangeList } from "./user-exchange-list/user-exchange-list.model"
 import { UserList } from "./user-list/user-list.model";
 import { UserValueCategory } from "./user-value-category/user-value-category.model";
 import { Category } from "./category/category.model";
+import { TradeBlankModule } from "./trade-blank/trade-blank.module";
+import { WishTradeBlankModule } from "./wish-tradeblank/wish-tradeblank.module";
+// import { WishTradeBlankModule } from "./get-category/wish-tradeblank.module";
 
 @Module({
-  controllers: [],
-  providers: [],
+  controllers: [], //TradeBlankController, GetCategoryController
+  providers: [], //TradeBlankService, GetCategoryService
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -89,6 +92,8 @@ import { Category } from "./category/category.model";
     UserValueCategoryModule,
     CategoryModule,
     StatusModule,
+    TradeBlankModule,
+    WishTradeBlankModule,
   ],
 })
 export class AppModule {}

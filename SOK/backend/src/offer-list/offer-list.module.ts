@@ -11,5 +11,6 @@ import { Status } from "src/status/status.model";
   providers: [OfferListService],
   controllers: [OfferListController],
   imports: [SequelizeModule.forFeature([Offer, BookLiterary, User, Status])],
+  exports: [OfferListService],
 })
 export class OfferListModule {}
