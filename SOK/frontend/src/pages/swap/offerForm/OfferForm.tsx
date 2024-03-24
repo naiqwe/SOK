@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { BookForm } from "../bookInputs/BookInputs";
 import { CategoryForm } from "../categoryInputs/CategoryInputs";
 import { useInput } from "../../../hooks/useInput";
+import style from "./offerForm.module.css";
 
 interface IBookData {
   authorLastName: string;
@@ -19,7 +20,7 @@ export const OfferForm = () => {
   const bookYear = useInput("", { minLength: 4, inputType: "text" });
 
   return (
-    <form>
+    <form className={style.form}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         {/* 1 */}
         <BookForm
@@ -33,7 +34,7 @@ export const OfferForm = () => {
         <CategoryForm></CategoryForm>
       </Box>
 
-      <button>{"Зарегестрироваться"}</button>
+      <button className={style.button}>{"Далее"}</button>
     </form>
   );
 };

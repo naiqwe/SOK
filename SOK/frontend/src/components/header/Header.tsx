@@ -12,6 +12,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HOME_ROUTE, SWAP_ROUTE } from "../../utils/consts";
 import style from "./header.module.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { logoutUser } from "../../store/reducers/ActionCreators";
 
 interface INavItem {
   name: string;
@@ -19,8 +21,11 @@ interface INavItem {
 }
 
 export const Header = () => {
+  const user = useAppSelector((state) => state.user);
+  const dispath = useAppDispatch();
   const nav = useNavigate();
-  const [isModalOpen, setisModalOpen] = useState(false);
+  const [isLoginModalOpen, setisLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setisRegisterModalOpen] = useState(false);
   const navItems: INavItem[] = [
     { name: "Главная", route: HOME_ROUTE },
     { name: "Начать обмен", route: SWAP_ROUTE },
@@ -28,12 +33,20 @@ export const Header = () => {
     { name: "Задать вопрос", route: "/questions" },
   ];
 
-  function closeModal() {
-    setisModalOpen(false);
+  function closeLoginModal() {
+    setisLoginModalOpen(false);
   }
 
-  function openModal() {
-    setisModalOpen(true);
+  function openLoginModal() {
+    setisLoginModalOpen(true);
+  }
+
+  function closeRegisterModal() {
+    setisRegisterModalOpen(false);
+  }
+
+  function openRegisterModal() {
+    setisRegisterModalOpen(true);
   }
 
   function handleNavClick(route: string) {
@@ -59,21 +72,35 @@ export const Header = () => {
               </Typography>
             </Box>
             <Box>
-              <List sx={{ display: "flex" }}>
-                <ListItem disablePadding>
+              {user.isAuth ? (
+                <List sx={{ display: "flex" }}>
                   <ListItemButton
-                    onClick={openModal}
+                    onClick={() => dispath(logoutUser())}
                     sx={{ textAlign: "center" }}
                   >
-                    <ListItemText>Авторизация</ListItemText>
+                    <ListItemText>Выйти</ListItemText>
                   </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton sx={{ textAlign: "center" }}>
-                    <ListItemText>Регистрация</ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              </List>
+                </List>
+              ) : (
+                <List sx={{ display: "flex" }}>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={openLoginModal}
+                      sx={{ textAlign: "center" }}
+                    >
+                      <ListItemText>Войти</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem disablePadding>
+                    <ListItemButton
+                      onClick={openRegisterModal}
+                      sx={{ textAlign: "center" }}
+                    >
+                      <ListItemText>Регистрация</ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                </List>
+              )}
             </Box>
           </Box>
         </Container>
@@ -105,7 +132,16 @@ export const Header = () => {
           ))}
         </List>
       </Container>
-      <AuthModal isOpen={isModalOpen} onClose={closeModal}></AuthModal>
+      <AuthModal
+        type={"login"}
+        isOpen={isLoginModalOpen}
+        onClose={closeLoginModal}
+      ></AuthModal>
+      <AuthModal
+        type={"register"}
+        isOpen={isRegisterModalOpen}
+        onClose={closeRegisterModal}
+      ></AuthModal>
     </>
   );
 };
