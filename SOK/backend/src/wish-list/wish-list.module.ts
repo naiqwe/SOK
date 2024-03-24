@@ -11,5 +11,6 @@ import { UserAddress } from "src/user-address/user-address.model";
   providers: [WishListService],
   controllers: [WishListController],
   imports: [SequelizeModule.forFeature([WishList, User, Status, UserAddress])],
+  exports: [WishListService],
 })
 export class WishListModule {}

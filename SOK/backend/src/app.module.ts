@@ -38,6 +38,7 @@ import { UserList } from "./user-list/user-list.model";
 import { UserValueCategory } from "./user-value-category/user-value-category.model";
 import { Category } from "./category/category.model";
 import { TradeBlankModule } from "./trade-blank/trade-blank.module";
+import { WishTradeBlankModule } from "./wish-tradeblank/wish-tradeblank.module";
 // import { WishTradeBlankModule } from "./get-category/wish-tradeblank.module";
 
 @Module({
@@ -92,7 +93,7 @@ import { TradeBlankModule } from "./trade-blank/trade-blank.module";
     CategoryModule,
     StatusModule,
     TradeBlankModule,
-    // WishTradeBlankModule,
+    WishTradeBlankModule,
   ],
 })
 export class AppModule {}
