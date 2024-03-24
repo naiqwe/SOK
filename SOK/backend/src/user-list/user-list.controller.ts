@@ -15,4 +15,13 @@ export class UserListController {
   getAll() {
     return this.userListService.getAllUserList();
   }
+
+  @Get("/offer")
+  getAllOffreList() {
+    return this.userListService.getOfferUserList();
+  }
+  @Get("/wish")
+  getAllWishList() {
+    return this.userListService.getWishUserList(1); // изменить параметр
+  }
 }

@@ -5,6 +5,7 @@ import { UserValueCategoryModule } from "src/user-value-category/user-value-cate
 import { WishListModule } from "src/wish-list/wish-list.module";
 import { UserListModule } from "src/user-list/user-list.module";
 import { UserAddressModule } from "src/user-address/user-address.module";
+import { UsersModule } from "src/users/users.module";
 
 @Module({
   providers: [WishTradeBlankService],
@@ -14,6 +15,7 @@ import { UserAddressModule } from "src/user-address/user-address.module";
     WishListModule,
     UserListModule,
     UserAddressModule,
+    UsersModule,
   ],
 })
 export class WishTradeBlankModule {}

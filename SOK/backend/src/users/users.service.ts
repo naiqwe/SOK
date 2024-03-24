@@ -41,4 +41,30 @@ export class UsersService {
     await user.save();
     return user;
   }
+
+  async updateUserNames({ idUser, firstName, lastName, secondName }) {
+    const user = await this.userRepository.findOne({
+      where: {
+        idUser,
+        firstName,
+        lastName,
+        secondName,
+      },
+    });
+
+    if (user) {
+      return user;
+    } else {
+      const user = await this.userRepository.findOne({
+        where: {
+          idUser: idUser,
+        },
+      });
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.secondName = secondName;
+      await user.save();
+      return user;
+    }
+  }
 }

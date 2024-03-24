@@ -29,4 +29,13 @@ export class UserAddressService {
     });
     return address;
   }
+
+  async getAddressByDto(dto: CreateUserAddressDto) {
+    const address = await this.userAddresRepository.findOne({
+      where: {
+        ...dto,
+      },
+    });
+    return address;
+  }
 }
