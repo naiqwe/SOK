@@ -20,4 +20,15 @@ export class WishListService {
     });
     return wish;
   }
+
+  //задание 3 получение списка ЗПК
+  async getSelfWishLists(userId: number) {
+    const selfWishList = await this.userWishListRepository.findAll({
+      include: { all: true },
+      where: {
+        idUser: userId,
+      },
+    });
+    return selfWishList;
+  }
 }

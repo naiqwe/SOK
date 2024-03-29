@@ -41,9 +41,16 @@ export class UserValueCategory extends Model<
   @BelongsTo(() => UserList)
   userList: UserList;
 
+  // @HasOne(() => Category, {
+  //   foreignKey: "idUserValueCategory",
+  //   sourceKey: "idUserValueCategory",
+  //   as: "IdUserValueCategory",
+  // })
+  // category: Category;
+
   @HasOne(() => Category, {
     foreignKey: "idUserValueCategory",
-    sourceKey: "idUserValueCategory",
+    sourceKey: "idCategory",
     as: "IdUserValueCategory",
   })
   category: Category;

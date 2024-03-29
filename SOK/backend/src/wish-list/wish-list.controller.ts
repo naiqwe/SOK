@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { WishListService } from "./wish-list.service";
 import { CreateWishListDto } from "./dto/create-wishlist.dto";
 
@@ -14,5 +14,11 @@ export class WishListController {
   @Get()
   getAll() {
     return this.usersWishListService.getAllWishList();
+  }
+
+  //задание 3 получение списка ЗПК
+  @Get(":userId")
+  getAllSelfWishListss(@Param("userId") userId: number) {
+    return this.usersWishListService.getSelfWishLists(userId);
   }
 }

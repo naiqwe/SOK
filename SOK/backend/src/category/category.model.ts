@@ -38,8 +38,15 @@ export class Category extends Model<Category, CategoryAttrs> {
   @Column({ type: DataType.BOOLEAN, allowNull: false, defaultValue: false })
   multiSelect: boolean;
 
+  // @HasOne(() => UserValueCategory, {
+  //   foreignKey: "idUserValueCategory",
+  //   sourceKey: "idUserValueCategory",
+  //   as: "IdUserValueCategory",
+  // })
+  // idUserValueCategory: UserValueCategory;
+
   @HasOne(() => UserValueCategory, {
-    foreignKey: "idUserValueCategory",
+    foreignKey: "idCategory",
     sourceKey: "idUserValueCategory",
     as: "IdUserValueCategory",
   })

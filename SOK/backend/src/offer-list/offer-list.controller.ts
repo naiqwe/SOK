@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { OfferListService } from "./offer-list.service";
 import { CreateOfferListDto } from "./dto/create-offerlist.dto";
 
@@ -10,9 +10,9 @@ export class OfferListController {
   create(@Body() dto: CreateOfferListDto) {
     return this.usersOfferListService.createOfferList(dto);
   }
-
-  @Get()
-  getAll() {
-    return this.usersOfferListService.getAllOfferList();
+  //задача 2 получение оффер листов ППК
+  @Get(":userId")
+  getAll(@Param("userId") userId: number) {
+    return this.usersOfferListService.getUserOfferLists(userId);
   }
 }
