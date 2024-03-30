@@ -1,206 +1,119 @@
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import style from "./categoryForm.module.css";
 import { Box, Checkbox } from "@mui/material";
-const categories = [
-  {
-    name: "Жанры",
-    value: [
-      "детектив",
-      "детские книги",
-      "история",
-      "мемуары",
-      "приключения",
-      "психология",
-      "фантастика",
-      "эзотерика",
-    ],
-  },
-  {
-    name: "Область науки",
-    value: [
-      "Технические литература",
-      "Автоматика",
-      "Радиоэлектроника",
-      "Энергетика",
-      "Физика",
-      "Химия",
-      "Биология",
-      "Информатика",
-    ],
-  },
-  { name: "Обложка", value: ["Мягкий переплет", "Твердый переплет"] },
-  { name: "Лаурят", value: ["Был лаурятом"] },
-  { name: "Киноадаптация", value: ["Есть", "Нет"] },
-  { name: "Язык", value: ["Русский", "Английский", "Французский "] },
-];
+import { fetchCategories } from "../../../service/api/categoryApi";
+import { ICatigories } from "../../../model/ICategories";
 
-export const CategoryForm = () => {
-  const [checkedState, setCheckedState] = useState({
-    isGenre: false,
-    isScience: false,
-    isBookCover: false,
-    isLauret: false,
-    isFilm: false,
-    isLanguage: false,
-  });
+interface CategoryFormProps {
+  categories: ICatigories[];
+  openCategory: Function;
+  checkSubCategory: Function;
+}
+
+export const CategoryForm: React.FC<CategoryFormProps> = ({
+  categories,
+  openCategory,
+  checkSubCategory,
+}) => {
+  // const [categories, setCategories] = useState<ICatigories[]>([]);
+  // const [categoriesId, setCategoriesId] = useState<number[]>([]);
+
+  // console.log(categoriesId);
+
+  // useEffect(() => {
+  //   fetchCategories()
+  //     .then((categories) => {
+  //       console.log(categories);
+  //       return categories.map((item) => {
+  //         item.open = false;
+  //         item.subCategory = item.subCategory.map((sub) => {
+  //           sub.checked = false;
+  //           return sub;
+  //         });
+  //         return item;
+  //       });
+  //     })
+  //     .then((res) => setCategories(res));
+  // }, []);
+
+  // function openCategoryCheckbox(categoryId: number) {
+  //   setCategories((prev) => {
+  //     return prev.map((item) => {
+  //       if (item.idCategory === categoryId) {
+  //         item.open = !item.open;
+  //       }
+  //       return item;
+  //     });
+  //   });
+  // }
+
+  // function checkSubCategory(categoryId: number, subCategoryId: number) {
+  //   setCategories((prev) => {
+  //     return prev.map((item) => {
+  //       if (item.idCategory == categoryId) {
+  //         item.subCategory.map((sub) => {
+  //           if (sub.idCategory === subCategoryId) {
+  //             sub.checked = !sub.checked;
+  //             if (sub.checked) {
+  //               setCategoriesId((prev) => [...prev, sub.idCategory]);
+  //             } else {
+  //               setCategoriesId(
+  //                 categoriesId.filter((id) => id != sub.idCategory)
+  //               );
+  //             }
+  //           }
+  //           return sub;
+  //         });
+  //       }
+  //       return item;
+  //     });
+  //   });
+  // }
 
   return (
     <div className={style.formsContainer}>
-      <h3 className={style.formTitle}>Категории *</h3>
-
+      <h3 className={style.formTitle}>Категории</h3>
       <Box
         className={style.scrollableDiv}
         sx={{ display: "flex", flexDirection: "column", ml: "10px" }}
       >
-        <label>
-          <Checkbox
-            checked={checkedState.isGenre}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isGenre: !prev.isGenre };
-              })
-            }
-          />
-          Жанры
-        </label>
+        {categories.map((category) => {
+          return (
+            <Fragment key={category.idCategory}>
+              <label>
+                <Checkbox
+                  checked={category.open}
+                  onChange={() => openCategory(category.idCategory)}
+                />
+                {category.name}
+              </label>
 
-        {checkedState.isGenre && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[0].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
+              {category.open && (
+                <Box
+                  sx={{ display: "flex", flexDirection: "column", ml: "10px" }}
+                >
+                  {category.subCategory.map((subItem: ICatigories) => {
+                    return (
+                      <label key={subItem.name}>
+                        <Checkbox
+                          checked={subItem.checked}
+                          onChange={() =>
+                            checkSubCategory(
+                              category.idCategory,
+                              subItem.idCategory
+                            )
+                          }
+                        />
 
-        <label>
-          <Checkbox
-            checked={checkedState.isScience}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isScience: !prev.isScience };
-              })
-            }
-          />
-          Область науки
-        </label>
-
-        {checkedState.isScience && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[1].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
-
-        <label>
-          <Checkbox
-            checked={checkedState.isBookCover}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isBookCover: !prev.isBookCover };
-              })
-            }
-          />
-          Обложка
-        </label>
-
-        {checkedState.isBookCover && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[2].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
-
-        <label>
-          <Checkbox
-            checked={checkedState.isLauret}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isLauret: !prev.isLauret };
-              })
-            }
-          />
-          Лаурят
-        </label>
-
-        {checkedState.isLauret && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[3].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
-
-        <label>
-          <Checkbox
-            checked={checkedState.isFilm}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isFilm: !prev.isFilm };
-              })
-            }
-          />
-          Киноадаптация
-        </label>
-
-        {checkedState.isFilm && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[4].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
-
-        <label>
-          <Checkbox
-            checked={checkedState.isLanguage}
-            onChange={() =>
-              setCheckedState((prev) => {
-                return { ...prev, isLanguage: !prev.isLanguage };
-              })
-            }
-          />
-          Язык
-        </label>
-
-        {checkedState.isLanguage && (
-          <Box sx={{ display: "flex", flexDirection: "column", ml: "10px" }}>
-            {categories[5].value.map((item) => {
-              return (
-                <label key={item}>
-                  <Checkbox />
-                  {item}
-                </label>
-              );
-            })}
-          </Box>
-        )}
+                        {subItem.name}
+                      </label>
+                    );
+                  })}
+                </Box>
+              )}
+            </Fragment>
+          );
+        })}
       </Box>
     </div>
   );
