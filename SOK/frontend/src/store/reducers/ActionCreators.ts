@@ -7,7 +7,9 @@ export const registerUser = createAsyncThunk(
   "user/register",
   async (user: IRegisterUser, thunkAPI) => {
     try {
-      const userData = await registration(user);
+      const userData: any = await registration(user);
+      localStorage.setItem("userName", userData.userName);
+
       console.log(userData);
       return userData;
     } catch (error: any) {
@@ -23,7 +25,9 @@ export const loginUser = createAsyncThunk(
   "user/login",
   async (user: any, thunkAPI) => {
     try {
-      const userData = await login(user.email, user.password);
+      const userData: any = await login(user.email, user.password);
+      localStorage.setItem("userName", userData.userName);
+
       console.log(userData);
       return userData;
     } catch (error: any) {
@@ -36,12 +40,13 @@ export const loginUser = createAsyncThunk(
 
 export const checkUser = createAsyncThunk("user/check", async (_, thunkAPI) => {
   try {
-    const userData = await check();
+    const userData: any = await check();
     console.log(userData);
+    localStorage.setItem("userName", userData.userName);
     return userData;
   } catch (error: any) {
     console.log({ error: error });
-
+    localStorage.clear();
     return thunkAPI.rejectWithValue(error);
   }
 });
