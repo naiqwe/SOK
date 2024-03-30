@@ -7,9 +7,9 @@ import { WishForm } from "./wishForm/WishForm";
 import { AddressForm } from "./addressForm/AddressForm";
 
 export const SwapPage = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<0 | 1 | 2>(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: 0 | 1 | 2) => {
     setValue(newValue);
   };
 
@@ -73,10 +73,10 @@ export const SwapPage = () => {
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <OfferForm></OfferForm>
+            <OfferForm nextStep={handleChange}></OfferForm>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
-            <WishForm></WishForm>
+            <WishForm nextStep={handleChange}></WishForm>
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
             <AddressForm></AddressForm>
