@@ -15,10 +15,24 @@ export class OfferListService {
     const offer = await this.userOfferListRepository.create(dto);
     return offer;
   }
-
-  async getAllOfferList() {
+  //задание 2 получение ППК
+  async getUserOfferLists(userId: number) {
     const offer = await this.userOfferListRepository.findAll({
       include: { all: true },
+      where: {
+        idUser: userId,
+      },
+    });
+    return offer;
+  }
+
+  //задание 2 получение ОФЕР ЛИСТА ПО ЕГО ID
+  async getOfferListsById(idOfferList: number) {
+    const offer = await this.userOfferListRepository.findAll({
+      include: { all: true },
+      where: {
+        idOfferList: idOfferList,
+      },
     });
     return offer;
   }

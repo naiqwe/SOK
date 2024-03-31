@@ -1,4 +1,4 @@
-import { Module } from "@nestjs/common";
+import { Module, forwardRef } from "@nestjs/common";
 import { OfferListService } from "./offer-list.service";
 import { OfferListController } from "./offer-list.controller";
 import { SequelizeModule } from "@nestjs/sequelize";
@@ -13,7 +13,7 @@ import { UserListModule } from "src/user-list/user-list.module";
   controllers: [OfferListController],
   imports: [
     SequelizeModule.forFeature([Offer, BookLiterary, User, Status]),
-    UserListModule,
+    forwardRef(() => UserListModule),
   ],
   exports: [OfferListService],
 })
