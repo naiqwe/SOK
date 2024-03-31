@@ -1,5 +1,6 @@
 import { AuthPage } from "./pages/auth/AuthPage";
 import { HomePage } from "./pages/home/HomePage";
+import { MySwapsPage } from "./pages/mySwaps/MySwapsPage";
 import { NotFoundPage } from "./pages/notFoundPage/NotFoundPage";
 import { SwapPage } from "./pages/swap/SwapPage";
 import {
@@ -8,6 +9,7 @@ import {
   LOGIN_ROUTE,
   NOT_FOUND_ROUTE,
   SWAP_ROUTE,
+  MY_SWAPS_ROUTE,
 } from "./utils/consts";
 
 export const publicRoutes = [
@@ -30,5 +32,9 @@ export const publicRoutes = [
   {
     path: SWAP_ROUTE,
     Component: SwapPage,
+  },
+  {
+    path: MY_SWAPS_ROUTE,
+    Component: MySwapsPage,
   },
 ];

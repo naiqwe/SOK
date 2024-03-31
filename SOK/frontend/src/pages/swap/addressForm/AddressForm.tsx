@@ -2,7 +2,8 @@ import React from "react";
 import style from "./addressForm.module.css";
 import { Box } from "@mui/material";
 import { useInput } from "../../../hooks/useInput";
-import { AddressInputs } from "../addressInputs/AddressInputs";
+import { AddressInputs } from "./addressInputs/AddressInputs";
+import { FullNameInputs } from "./fullNameInputs/FullNameInputs";
 
 export const AddressForm = () => {
   const city = useInput(
@@ -64,7 +65,11 @@ export const AddressForm = () => {
         ></AddressInputs>
 
         {/* 2 */}
-        <div className={style.formsContainer}>2</div>
+        <FullNameInputs
+          firstName={firstName}
+          lastName={lastName}
+          secondName={secondName}
+        ></FullNameInputs>
       </Box>
 
       <button className={style.button}>{"Далее"}</button>
